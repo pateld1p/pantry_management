@@ -146,7 +146,7 @@ export default function Home() {
           justifyContent="center"
           borderBottom="1px solid #ddd"
         >
-          <Typography variant="h4" color="#333" textAlign="center">
+         <Typography variant="h4" color="#333" textAlign="center">
             Pantry Items
           </Typography>
         </Box>

@@ -1,18 +1,16 @@
-// spoonacular.js
-
 import axios from 'axios';
 
-const SPOONACULAR_API_KEY = '8862a901e3984a9f96b81e52d1f84e36'; // Replace with your Spoonacular API Key
+const SPOONACULAR_API_KEY = process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY;
 
 export const getRecipes = async (ingredients) => {
   try {
     const response = await axios.get(`https://api.spoonacular.com/recipes/findByIngredients`, {
       params: {
         ingredients: ingredients.join(','),
-        number: 10, // Number of recipes to return
-        ranking: 1,  // Prioritize recipes with the most matching ingredients
-        ignorePantry: true, // Ignore common pantry items
-        apiKey: SPOONACULAR_API_KEY,
+        number: 10,
+        ranking: 1,
+        ignorePantry: true,
+        apiKey: SPOONACULAR_API_KEY, // Ensure the key is passed here
       },
     });
     return response.data;
