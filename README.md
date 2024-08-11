@@ -22,9 +22,7 @@ The Pantry Management App is a web application that allows users to manage their
 
 This project is designed to be a simple, yet powerful tool for managing pantry inventory and discovering new recipes. The combination of Next.js, Firebase, and Spoonacular API provides a seamless experience for users, making pantry management easy and fun.
 
-## Getting Started
-
-First, run the development server:
+Running the development server:
 
 ```bash
 npm run dev
