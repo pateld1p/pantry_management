@@ -12,6 +12,8 @@ export default function Home() {
   const [inventory, setInventory] = useState([]);
   const [open, setOpen] = useState(false);
   const [itemName, setItemName] = useState('');
+  const [searchQuery, setSearchQuery] = useState(''); // State for search query
+  const [filteredInventory, setFilteredInventory] = useState([]); // State for filtered inventory
   const [recipes, setRecipes] = useState([]);
   
   const updateInventory = async () => {
@@ -25,6 +27,7 @@ export default function Home() {
       });
     });
     setInventory(inventoryList);
+    setFilteredInventory(inventoryList); // Set the filtered inventory to the full inventory initially
   };
 
   const removeItem = async (item) => {
@@ -66,6 +69,18 @@ export default function Home() {
   useEffect(() => {
     updateInventory();
   }, []);
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    if (query.trim() === '') {
+      setFilteredInventory(inventory); // Reset to full inventory if search query is empty
+    } else {
+      const filteredItems = inventory.filter((item) =>
+        item.name.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredInventory(filteredItems);
+    }
+  };
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -137,6 +152,16 @@ export default function Home() {
       >
         Get Recipes
       </Button>
+
+      {/* Search bar for filtering pantry items */}
+      <TextField
+        variant="outlined"
+        fullWidth
+        value={searchQuery}
+        onChange={(e) => handleSearch(e.target.value)}
+        placeholder="Search Pantry Items"
+        sx={{ maxWidth: '800px', marginTop: '16px', marginBottom: '16px' }}
+      />
       
       <Box border='1px solid #ddd' borderRadius="8px" padding={2} bgcolor="white" width="100%" maxWidth="800px">
         <Box
@@ -146,12 +171,12 @@ export default function Home() {
           justifyContent="center"
           borderBottom="1px solid #ddd"
         >
-         <Typography variant="h4" color="#333" textAlign="center">
+          <Typography variant="h4" color="#333" textAlign="center">
             Pantry Items
           </Typography>
         </Box>
         <Stack width="100%" spacing={2} maxHeight="400px" overflow="auto" padding={2}>
-          {inventory.map(({ name, quantity }) => (
+          {filteredInventory.map(({ name, quantity }) => (
             <Card key={name} variant="outlined" sx={{ display: 'flex', alignItems: 'center', padding: 2 }}>
               <CardContent sx={{ flex: '1 0 auto' }}>
                 <Typography variant="h6" component="div">
