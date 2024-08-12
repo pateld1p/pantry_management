@@ -4,10 +4,11 @@ import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+const FIREBASE_API_KEY = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyC7vdcodn5xtnuzKpuf50zkbiZCCBoVdX8",
+  apiKey: FIREBASE_API_KEY,
   authDomain: "inventory-management-fc151.firebaseapp.com",
   projectId: "inventory-management-fc151",
   storageBucket: "inventory-management-fc151.appspot.com",
